@@ -7,9 +7,10 @@ In a nutshell, any git command that exits with a non-zero status will trigger Th
 
 1. Wiping repo history
 2. Wiping repo contents
-3. Creating a new, blank repo in its place
-4. Adding a readme with the git error (the horror!)
-5. Force pushing the new repo to all previous origins
+3. Deleting all local and remote branches
+4. Creating a new, blank repo in its place
+5. Adding a readme with the git error (the horror!)
+6. Force pushing the new repo to all previous origins
 
 ## Installation
     git clone http://github.com/mway/suicide.git
