@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO:
+# 1. Delete all local and remote branches
+
 # If git isn't installed, we can't exactly wrap it...
 type "git" &>/dev/null || { echo "Can't find git, aborting..." && exit 1; }
 
@@ -34,7 +37,7 @@ for (( i=0; i<${#_sg_remotes[@]}; i++ )); do
     read -a _remote_parts <<< ${_sg_remotes[$i]}
     [ -z "${_remote_parts[0]}" ] && continue
     git remote add ${_remote_parts[0]} ${_remote_parts[1]}
-    git push -u --force ${_remote_parts[0]} ${_remote_parts[1]}
+    git push -u --force ${_remote_parts[0]} master
 done
 
 printf $_sg_log
