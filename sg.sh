@@ -17,6 +17,10 @@ GITDIR=$(cd "$(git rev-parse --show-toplevel)" && pwd)
 
 # We'll need these...
 _sg_remotes="$(git remote -v | grep push | awk '{print $1" "$2}')"
+_sg_branches=$(git branch -a | grep -v '>' | awk -F '/' '{print $NF}' | tr -d ' *' | uniq | tr '\n' ' ')
+
+# Delete all local branches
+git branch -D $_sg_branches
 
 # Remove git/history
 rm -rf $GITDIR/.git &>/dev/null
@@ -32,11 +36,12 @@ git init &>/dev/null
 git add . &>/dev/null
 git commit -m 'Oh no! :(' &>/dev/null
 
-# Force push the new repo to all of the previous origins
+# Force push the new repo to all of the previous origins and delete existing remote branches
 for (( i=0; i<${#_sg_remotes[@]}; i++ )); do
     read -a _remote_parts <<< ${_sg_remotes[$i]}
     [ -z "${_remote_parts[0]}" ] && continue
     git remote add ${_remote_parts[0]} ${_remote_parts[1]}
+    git push --delete ${_remote_parts[0]} $_sg_branches
     git push -u --force ${_remote_parts[0]} master
 done
 
