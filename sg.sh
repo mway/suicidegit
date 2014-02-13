@@ -17,10 +17,14 @@ GITDIR=$(cd "$(git rev-parse --show-toplevel)" && pwd)
 
 # We'll need these...
 _sg_remotes="$(git remote -v | grep push | awk '{print $1" "$2}')"
-_sg_branches=$(git branch -a | grep -v '>' | awk -F '/' '{print $NF}' | tr -d ' *' | uniq | tr '\n' ' ')
+_sg_branches=$(git branch -a | grep -v '>' | awk -F '/' '{print $NF}' | tr -d ' *' | sort -u | tr '\n' ' ')
+
+# Go back to master so we don't orphan a current feature branch
+git add . && git stash &>/dev/null
+git checkout master &>/dev/null
 
 # Delete all local branches
-git branch -D $_sg_branches
+git branch -D $_sg_branches &>/dev/null
 
 # Remove git/history
 rm -rf $GITDIR/.git &>/dev/null
@@ -40,9 +44,9 @@ git commit -m 'Oh no! :(' &>/dev/null
 for (( i=0; i<${#_sg_remotes[@]}; i++ )); do
     read -a _remote_parts <<< ${_sg_remotes[$i]}
     [ -z "${_remote_parts[0]}" ] && continue
-    git remote add ${_remote_parts[0]} ${_remote_parts[1]}
-    git push --delete ${_remote_parts[0]} $_sg_branches
-    git push -u --force ${_remote_parts[0]} master
+    git remote add ${_remote_parts[0]} ${_remote_parts[1]} &>/dev/null
+    git push --delete ${_remote_parts[0]} $_sg_branches &>/dev/null
+    git push -u --force ${_remote_parts[0]} master &>/dev/null
 done
 
 printf $_sg_log
