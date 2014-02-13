@@ -1,5 +1,5 @@
 # Suicide Git
-*The utterly massochistic approach to revision control.*
+*The utterly masochistic approach to revision control.*
 
 Introducing Suicide Git, (very obviously) inspired by [Suicide Linux](http://qntm.org/suicide).  Similar to Suicide Linux (SL), Suicide Git (SG) could also be likened to a "game", albeit one that might cost you your job/colleagues.  Frankly, I suggest not using it at all.  A very simple (bash) installation guide is below, regardless.
 
