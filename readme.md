@@ -25,7 +25,7 @@ The install script copies the SG script to `/usr/local/bin/sg` and aliases `git`
     $ git rebase    # conflicts? ruh roh!
 
 ## Contributing
-SOP FFPP.  Fork, feature, PR, party.  Any comments/ideas/suggestions/contributions welcome.
+SOP FFPP.  Fork, feature, PR, party.  Any comments/ideas/suggestions/contributions welcome, especially if they do incredibly confounding things that my git-fu is not currently capable of.
 
 ## Etc
 Thanks especially to Suicide Linux and its creator, as well as whatever twisted netherrealm my brain exists in.
